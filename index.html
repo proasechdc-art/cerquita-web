@@ -1,18 +1,32 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0B2A3D"><link rel="stylesheet" href="style.css"><title>Cerquita · Tu antojo, en camino</title><meta name="description" content="Cerquita conecta clientes, comercios y repartidores: pide de los negocios cerca de ti y sigue tu domicilio en el mapa."></head><body>
-<header class="top"><div class="wrap bar"><a class="logo" href="index.html"><i>🛵</i><span>Cer<b>quita</b><small>Tu antojo, en camino</small></span></a><nav class="menu"><a href="index.html#como">Cómo funciona</a><a href="index.html#comercios">Para comercios</a><a href="index.html#repartidores">Para repartidores</a><a href="index.html#contacto">Contacto</a></nav></div></header>
-<div class="hero"><div class="wrap"><h1>Todo lo que necesitas,<br><span>cerquita de ti</span></h1><p>Pide a los comercios de tu zona, paga en efectivo o en línea y sigue tu domicilio en el mapa, en tiempo real.</p>
-<a class="btn" href="#como">Muy pronto en Google Play</a><a class="btn alt" href="#comercios">Quiero vender en Cerquita</a></div></div>
-<section id="como"><div class="wrap"><h2>Cómo funciona</h2><ol class="pasos"><li><b>Elige un comercio</b> y los productos que quieres, desde restaurantes y panaderías hasta farmacias, tiendas y mascotas.</li><li><b>Pide y paga</b> en efectivo al recibir, o en línea con tarjeta, PSE o Nequi mediante Wompi.</li><li><b>Sigue tu pedido</b> paso a paso y mira al repartidor acercarse en el mapa. Si tu lugar no tiene dirección, marca el punto exacto y manda una foto.</li></ol></div></section>
-<section class="gris"><div class="wrap"><div class="grid">
-<div class="card"><div class="ic">🛍️</div><h3>Para clientes</h3><p>Compra cerca de casa, guarda tus favoritos, califica y reporta cualquier problema con tu pedido en las primeras 24 horas.</p></div>
-<div class="card"><div class="ic">🏪</div><h3>Para comercios</h3><p>Recibe pedidos, administra tus productos con fotos, abre y cierra tu negocio y consulta tus ventas y liquidaciones.</p></div>
-<div class="card"><div class="ic">🛵</div><h3>Para repartidores</h3><p>Recibe ofertas de pedidos cercanos, navega con Google Maps y consulta tus ganancias y tu pago neto.</p></div></div></div></section>
-<section id="comercios"><div class="wrap"><h2>¿Tienes un negocio?</h2><p>Súmate a Cerquita. Creas tu comercio en minutos desde la app, subes tus productos y empiezas a recibir pedidos. Cerquita cobra una comisión sobre los productos vendidos y te liquida lo que te corresponde.</p><p><a class="btn dark" href="mailto:proasech@gmail.com?subject=Quiero%20vender%20en%20Cerquita">Escríbenos</a></p></div></section>
-<section class="gris" id="repartidores"><div class="wrap"><h2>¿Quieres repartir?</h2><p>Trabaja de forma independiente con tu propio horario. Te activas "En línea", aceptas los pedidos que quieras y ves tus ganancias en la app. Descarga Cerquita y crea tu cuenta como repartidor.</p></div></section>
-<section><div class="wrap"><h2>Preguntas frecuentes</h2>
-<details><summary>¿Cómo pago mi pedido?</summary><p>En efectivo al repartidor, o en línea con Wompi (tarjeta, PSE, Nequi). Los pagos en línea los confirma Wompi; Cerquita no guarda los datos de tu tarjeta.</p></details>
-<details><summary>¿Puedo cancelar un pedido?</summary><p>Sí, mientras el comercio no lo haya aceptado. Después de aceptado ya no se cancela desde la app, pero puedes reportar un problema. Consulta los <a href="terminos.html">términos y condiciones</a>.</p></details>
-<details><summary>¿Y si mi lugar no tiene dirección?</summary><p>Marca la casilla "Mi lugar no tiene dirección", pon el pin en tu puerta, escribe una referencia y, si quieres, toma una foto del lugar. Solo la ve el repartidor de tu pedido.</p></details>
-<details><summary>¿Cómo elimino mi cuenta?</summary><p>Desde la app en Perfil, o siguiendo los pasos en <a href="eliminar-cuenta.html">esta página</a>.</p></details></div></section>
-<section class="gris" id="contacto"><div class="wrap"><h2>Contacto</h2><p>Escríbenos a <a href="mailto:proasech@gmail.com">proasech@gmail.com</a>. Atendemos desde Medellín, Antioquia, Colombia.</p></div></section>
-<footer><div class="wrap"><p><a href="privacidad.html">Política de privacidad</a><a href="terminos.html">Términos y condiciones</a><a href="eliminar-cuenta.html">Eliminar mi cuenta</a></p><p>© 2026 Cerquita · Yerson Moreno Mosquera · Medellín, Antioquia, Colombia · <a href="mailto:proasech@gmail.com">proasech@gmail.com</a></p></div></footer></body></html>
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Cerquita · Panel de administración</title>
+<style>
+:root{--navy:#0B2A3D;--green:#1DB954;--orange:#F26B21;--bg:#F4F7F9}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:#1b2a33}
+[hidden]{display:none!important}
+.centro{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--navy);padding:20px}
+.caja{background:#fff;border-radius:18px;padding:30px;width:100%;max-width:380px}.caja h1{margin:0 0 4px;color:var(--navy)}.caja p{color:#66757f;margin:0 0 16px}
+input,select,button{font:inherit}input,select{width:100%;padding:11px 12px;border:1px solid #CBD5DA;border-radius:10px;margin:6px 0}
+button{background:var(--green);color:#fff;border:0;border-radius:10px;padding:10px 16px;font-weight:700;cursor:pointer}button.gr{background:#7A8A94}button.rj{background:#D32F2F}button.nv{background:var(--navy)}
+button:hover{filter:brightness(1.07)}.err{color:#D32F2F;font-weight:600}
+header{background:var(--navy);color:#fff;display:flex;justify-content:space-between;align-items:center;padding:12px 20px;flex-wrap:wrap;gap:10px}
+header b{font-size:20px;font-style:italic}header b span{color:var(--green)}header small{color:#BFD3DD;margin-left:10px}
+nav{background:#fff;border-bottom:1px solid #E5E9EC;display:flex;gap:4px;padding:0 14px;overflow-x:auto}
+nav a{padding:13px 14px;cursor:pointer;color:#445;font-weight:600;white-space:nowrap;border-bottom:3px solid transparent}nav a.on{color:var(--navy);border-color:var(--green)}
+main{padding:20px;max-width:1200px;margin:0 auto}h2{margin:4px 0 14px;color:var(--navy)}h3{margin:24px 0 10px;color:var(--navy)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.kpi{background:#fff;border:1px solid #E5E9EC;border-radius:14px;padding:16px}.kpi .v{font-size:26px;font-weight:800;color:var(--navy)}.kpi .t{color:#66757f}.kpi .s{font-size:12px;color:#99a}
+.tw{overflow-x:auto;background:#fff;border:1px solid #E5E9EC;border-radius:14px}table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:9px 12px;text-align:left;border-bottom:1px solid #EEF1F3;white-space:nowrap}th{background:#F7F9FA;color:#556}
+.barra{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap}.barra input,.barra select{width:auto;flex:1;min-width:160px;margin:0}
+.chips{display:flex;gap:8px;flex-wrap:wrap}.chip{background:#fff;border:1px solid #E5E9EC;border-radius:20px;padding:6px 12px}
+.mut{color:#66757f}.card{background:#fff;border:1px solid #E5E9EC;border-radius:14px;padding:16px;margin-bottom:12px}
+.fila{display:flex;gap:10px;flex-wrap:wrap;align-items:end}.fila label{display:block;font-size:13px;color:#556}.fila input,.fila select{width:auto;min-width:140px}
+.aviso{position:fixed;top:14px;right:14px;padding:12px 16px;border-radius:12px;color:#fff;font-weight:600;z-index:9;max-width:340px}.aviso.ok{background:var(--green)}.aviso.mal{background:#D32F2F}
+small.h{font-weight:400;color:#66757f}
+</style></head><body>
+<div id="aviso" class="aviso" hidden></div>
+<div id="login" class="centro"><form class="caja" id="fl"><h1>Cerquita</h1><p>Panel de administración</p>
+<input id="em" type="email" placeholder="Correo" autocomplete="username" required><input id="pw" type="password" placeholder="Contraseña" autocomplete="current-password" required>
+<button style="width:100%;margin-top:8px">Entrar</button><p id="le" class="err"></p></form></div>
+<div id="app" hidden><header><div><b>Cer<span>quita</span></b><small>Panel de administración</small></div><div><small id="quien"></small> <button class="gr" id="salir">Salir</button></div></header><nav id="tabs"></nav><main id="vista"></main></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="panel.js"></script></body></html>
