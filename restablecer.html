@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Cerquita · Nueva contraseña</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:#0B2A3D;font-family:system-ui,Segoe UI,Roboto,sans-serif;padding:16px}
+.box{background:#fff;border-radius:16px;padding:28px;width:100%;max-width:400px;box-shadow:0 10px 30px #0004}
+h1{margin:0 0 4px;color:#1DB954;font-size:26px}h2{margin:0 0 16px;font-size:18px;color:#12303F}p{color:#4a6574;line-height:1.5}
+label{font-size:13px;color:#5b7482}input{width:100%;padding:12px;border:1px solid #CBD7DD;border-radius:8px;font-size:16px;margin:4px 0 12px}
+button{width:100%;background:#1DB954;color:#fff;border:0;border-radius:8px;padding:13px;font-size:16px;font-weight:700;cursor:pointer}button:disabled{opacity:.6}
+.err{color:#D32F2F;font-size:14px;min-height:20px}.ok{color:#1B8A47;font-weight:700}[hidden]{display:none!important}
+</style></head><body><div class="box">
+<h1>Cerquita</h1>
+<div id="cargando"><p>Verificando tu enlace…</p></div>
+<div id="invalido" hidden><h2>Enlace no válido o vencido</h2><p id="motivo">Pide un enlace nuevo desde la app, en la opción "¿Olvidaste tu contraseña?". Cada enlace sirve una sola vez y vence en poco tiempo.</p></div>
+<form id="form" hidden><h2>Crea tu nueva contraseña</h2>
+<label for="p1">Nueva contraseña (mínimo 8 caracteres)</label><input id="p1" type="password" minlength="8" required autocomplete="new-password">
+<label for="p2">Repite la contraseña</label><input id="p2" type="password" minlength="8" required autocomplete="new-password">
+<p class="err" id="err"></p><button id="btn">Guardar contraseña</button></form>
+<div id="listo" hidden><h2 class="ok">¡Contraseña actualizada!</h2><p>Abre la app de Cerquita e inicia sesión con tu nueva contraseña.</p></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.0/dist/umd/supabase.min.js"></script>
+<script>
+const sb = supabase.createClient('https://rlaxqsuxemawtiizvicq.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJsYXhxc3V4ZW1hd3RpaXp2aWNxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA3NzI1MjIsImV4cCI6MjEwNjM0ODUyMn0.Ksk2OUtHzACWDOpl6FD26zmR-hnJfiPZCotQCGMpb0Y', { auth: { persistSession: false, detectSessionInUrl: true, flowType: 'implicit' } });
+const $ = (id) => document.getElementById(id);
+const ver = (id) => { ['cargando','invalido','form','listo'].forEach((x) => $(x).hidden = x !== id); };
+const hash = location.hash || '';
+let listo = false;
+if (/error_description=/.test(hash)) { $('motivo').textContent = 'El enlace venció o ya se usó. Pide uno nuevo desde la app, en la opción "¿Olvidaste tu contraseña?".'; ver('invalido'); }
+else {
+  sb.auth.onAuthStateChange((ev) => { if (ev === 'PASSWORD_RECOVERY') { listo = true; ver('form'); } });
+  setTimeout(async () => {
+    if (listo) return;
+    const { data } = await sb.auth.getSession();
+    if (/type=recovery/.test(hash) && data.session) ver('form'); else ver('invalido');
+  }, 2500);
+}
+$('form').addEventListener('submit', async (e) => {
+  e.preventDefault(); $('err').textContent = '';
+  const a = $('p1').value, b = $('p2').value;
+  if (a.length < 8) { $('err').textContent = 'Usa al menos 8 caracteres.'; return; }
+  if (a !== b) { $('err').textContent = 'Las contraseñas no coinciden.'; return; }
+  $('btn').disabled = true;
+  const { error } = await sb.auth.updateUser({ password: a });
+  if (error) { $('err').textContent = /different from the old/i.test(error.message) ? 'La nueva contraseña debe ser distinta a la anterior.' : 'No se pudo guardar. Pide un enlace nuevo e inténtalo de nuevo.'; $('btn').disabled = false; return; }
+  await sb.auth.signOut(); ver('listo');
+});
+</script></body></html>
