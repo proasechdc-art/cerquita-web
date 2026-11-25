@@ -1,0 +1,78 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cerquita · Centro de control</title>
+<style>
+:root{--n:#0B2A3D;--g:#1DB954;--o:#F26B21;--bg:#F3F6F8;--c:#fff;--t:#14212b;--m:#6b7b88;--l:#e1e8ed}
+*{box-sizing:border-box}body{margin:0;font:14px/1.45 system-ui,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--t)}
+header{background:var(--n);color:#fff;padding:12px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+header b{font-size:18px}header b i{color:var(--g);font-style:normal}header span{opacity:.7;font-size:12px}
+.sp{flex:1}nav{display:flex;gap:6px}nav button,.btn{border:0;border-radius:8px;padding:8px 14px;font:inherit;font-weight:600;cursor:pointer}
+nav button{background:#ffffff1a;color:#fff}nav button.on{background:var(--g)}.btn{background:var(--g);color:#fff}.btn.s{background:var(--l);color:var(--t);padding:5px 10px;font-size:12px}
+main{max-width:1200px;margin:0 auto;padding:18px}.sec{display:none}.sec.on{display:block}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-bottom:16px}
+.k{background:var(--c);border-radius:12px;padding:14px;border-left:5px solid var(--g);box-shadow:0 1px 3px #0001}.k.o{border-color:var(--o)}.k.n{border-color:var(--n)}
+.k small{color:var(--m);display:block}.k b{font-size:21px}
+.card{background:var(--c);border-radius:12px;padding:14px;margin-bottom:16px;box-shadow:0 1px 3px #0001}.card h3{margin:0 0 10px;font-size:15px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.card h3 input{margin-left:auto;padding:6px 10px;border:1px solid var(--l);border-radius:8px;font:inherit}
+.tw{overflow:auto;max-height:420px}table{border-collapse:collapse;width:100%;font-size:13px}th,td{padding:7px 9px;border-bottom:1px solid var(--l);text-align:left;white-space:nowrap}
+th{position:sticky;top:0;background:#f7fafb;color:var(--m);font-size:12px}td.r,th.r{text-align:right}.em{color:var(--m);padding:12px}
+.chip{display:inline-block;background:var(--l);border-radius:20px;padding:3px 10px;margin:2px;font-size:12px}.chip b{color:var(--n)}
+.bars{display:flex;align-items:flex-end;gap:6px;height:130px}.bars div{flex:1;text-align:center;font-size:10px;color:var(--m)}.bars i{display:block;background:var(--g);border-radius:4px 4px 0 0;min-height:2px;margin-bottom:3px}
+.links a{display:inline-block;margin:3px 6px 3px 0;padding:7px 12px;border-radius:8px;background:var(--n);color:#fff;text-decoration:none;font-weight:600}
+#login{max-width:340px;margin:12vh auto;background:var(--c);padding:24px;border-radius:14px;box-shadow:0 4px 18px #0002}#login input{width:100%;padding:11px;margin:6px 0;border:1px solid #9fb0bb;border-radius:8px;font:inherit;font-size:16px;color:#14212b;background:#fff}
+#login h2{margin:0 0 4px;color:var(--n)}.err{color:#c0392b;min-height:20px}.warn{background:#fff4e5;color:#9a5b00;padding:8px 12px;border-radius:8px;margin-bottom:12px;display:none}
+</style></head><body>
+<div id="login"><h2>Cerquita <span style="color:var(--g)">Domicilios</span></h2><p style="color:var(--m);margin:0 0 10px">Centro de control · solo administradores</p>
+<input id="em" type="email" value="proasechdc+admin@gmail.com" placeholder="Correo del administrador" autocomplete="username" autofocus><input id="clave" name="clave" type="text" placeholder="Contraseña" autocomplete="off"><div style="font-size:12px;color:var(--m);margin:2px 0">Se ve en claro para que compruebes lo que escribes.</div><div style="font-size:12px;color:var(--m);margin:4px 0">Caracteres escritos: <b id="cnt">0</b> · Última tecla: <b id="dbg">ninguna</b></div><button class="btn s" id="paste" type="button" style="margin-bottom:4px">Pegar contraseña copiada</button><div style="font-size:12px;color:var(--m)">Solo entras una vez: la sesión queda guardada en este navegador.</div><button class="btn" id="go" style="width:100%;margin-top:8px">Entrar</button><div class="err" id="err"></div></div>
+<div id="app" style="display:none"><header><b>Cerquita <i>Domicilios</i></b><span id="who"></span><nav><button data-t="c" class="on">Centro de control</button><button data-t="a">Administrador</button><button data-t="f">Contable</button></nav><div class="sp"></div><button class="btn s" id="rf">Actualizar</button><button class="btn s" id="out">Salir</button></header>
+<main><div class="warn" id="warn"></div>
+<section class="sec on" id="c"><div class="grid" id="k1"></div><div class="card"><h3>Pedidos por estado</h3><div id="st"></div></div><div class="card"><h3>Ventas de los últimos 14 días</h3><div class="bars" id="ch"></div></div>
+<div class="card links"><h3>Accesos del proyecto</h3><a target="_blank" href="https://supabase.com/dashboard/project/rlaxqsuxemawtiizvicq">Supabase</a><a target="_blank" href="https://github.com/proasechdc-art/app-Cerca">GitHub</a><a target="_blank" href="https://play.google.com/console">Google Play Console</a><a target="_blank" href="https://expo.dev">Expo (compilaciones)</a></div></section>
+<section class="sec" id="a"><div class="grid" id="k2"></div><div id="t_orders"></div><div id="t_stores"></div><div id="t_users"></div><div id="t_claims"></div></section>
+<section class="sec" id="f"><div class="grid" id="k3"></div><div id="t_pending"></div><div id="t_settle"></div><div id="t_refunds"></div></section></main></div>
+<script>var cnt=()=>document.querySelector('#cnt').textContent=document.querySelector('#clave').value.length;['input','keyup','change','paste'].forEach(v=>document.querySelector('#clave').addEventListener(v,()=>setTimeout(cnt,0)));
+document.addEventListener('keydown',e=>{document.querySelector('#dbg').textContent=e.key.length>1?e.key:'una letra'});
+document.querySelector('#paste').onclick=async()=>{try{document.querySelector('#clave').value=await navigator.clipboard.readText();cnt()}catch(x){document.querySelector('#err').textContent='Tu navegador no permitió pegar. Usa Ctrl+V dentro del campo.'}};
+window.addEventListener("load",function(){if(!window.supabase)document.getElementById("err").textContent="No se pudo cargar la conexión. Revisa tu internet y abre el archivo desde Chrome."})</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script>
+const SB_URL='https://rlaxqsuxemawtiizvicq.supabase.co',SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJsYXhxc3V4ZW1hd3RpaXp2aWNxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA3NzI1MjIsImV4cCI6MjEwNjM0ODUyMn0.Ksk2OUtHzACWDOpl6FD26zmR-hnJfiPZCotQCGMpb0Y';const sb=supabase.createClient(SB_URL,SB_KEY);
+const $=s=>document.querySelector(s),cop=n=>new Intl.NumberFormat('es-CO',{style:'currency',currency:'COP',maximumFractionDigits:0}).format(n||0);
+const fd=d=>d?new Date(d).toLocaleString('es-CO',{dateStyle:'short',timeStyle:'short'}):'',esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const ST={pending:'Pendiente',preparing:'Preparando',ready:'Listo',on_way:'En camino',delivered:'Entregado',cancelled:'Cancelado',cash:'Efectivo',electronic:'Electrónico',courier:'Repartidor',merchant:'Comercio',repartidor:'Repartidor',comercio:'Comercio',cliente:'Cliente',admin:'Administrador'};
+const tr=v=>ST[v]||v,M=cop,D=fd,T=tr;const warns=[];
+const C={
+orders:['Pedidos recientes','admin_orders',[['created_at','Fecha',D],['store_name','Comercio'],['customer_email','Cliente'],['courier_email','Repartidor'],['status','Estado',T],['payment_method','Pago',T],['total','Total',M,1],['commission_amount','Comisión',M,1]]],
+stores:['Comercios','admin_stores',[['name','Comercio'],['category','Categoría'],['owner_email','Dueño'],['is_open','Abierto',v=>v?'Sí':'No'],['products','Productos',null,1],['orders','Pedidos',null,1],['rating','Calificación'],['deleted_at','Eliminado',D]]],
+users:['Usuarios','admin_users',[['name','Nombre'],['email','Correo'],['role','Rol',T],['created_at','Creado',D],['last_sign_in_at','Último ingreso',D],['deleted_at','Eliminado',D]]],
+claims:['Reclamos','admin_claims',[['created_at','Fecha',D],['status','Estado'],['store_name','Comercio'],['email','Cliente'],['reason','Motivo'],['order_total','Pedido',M,1],['refund_amount','Reembolso',M,1],['fault','Responsable']]],
+pending:['Saldos pendientes de liquidar','admin_pending',[['name','Nombre'],['email','Correo'],['role','Rol',T],['earnings_pending','Ganancias repartidor',M,1],['cash_pending','Efectivo por entregar',M,1],['merchant_pending','Por pagar comercio',M,1]]],
+settle:['Liquidaciones','admin_settlements',[['created_at','Fecha',D],['party_type','Tipo',T],['name','Nombre'],['email','Correo'],['gross_amount','Bruto',M,1],['cash_applied','Efectivo descontado',M,1],['net_amount','Neto a pagar',M,1],['status','Estado'],['payout_status','Pago']]],
+refunds:['Reembolsos','admin_refunds',[['created_at','Fecha',D],['email','Cliente'],['amount','Valor',M,1],['reason','Motivo'],['status','Estado'],['reference','Referencia']]]};
+const store={};
+function tbl(k,rows){const[t,,cols]=C[k];store[k]=rows;const el=$('#t_'+k);
+el.innerHTML=`<div class="card"><h3>${t} <span class="chip">${rows.length}</span><input placeholder="Buscar…" data-k="${k}"><button class="btn s" data-x="${k}">Descargar CSV</button></h3><div class="tw"><table><thead><tr>${cols.map(c=>`<th class="${c[3]?'r':''}">${c[1]}</th>`).join('')}</tr></thead><tbody></tbody></table></div></div>`;body(k,'');}
+function body(k,q){const cols=C[k][2],rows=store[k].filter(r=>!q||cols.some(c=>String(c[2]?c[2](r[c[0]]):r[c[0]]??'').toLowerCase().includes(q)));
+const b=$('#t_'+k+' tbody');b.innerHTML=rows.length?rows.map(r=>'<tr>'+cols.map(c=>`<td class="${c[3]?'r':''}">${esc(c[2]?c[2](r[c[0]]):r[c[0]]??'')}</td>`).join('')+'</tr>').join(''):`<tr><td class="em" colspan="${cols.length}">Sin datos</td></tr>`;}
+function csv(k){const cols=C[k][2],q=v=>'"'+String(v??'').replace(/"/g,'""')+'"';const s='\ufeff'+[cols.map(c=>q(c[1])).join(',')].concat(store[k].map(r=>cols.map(c=>q(r[c[0]])).join(','))).join('\n');
+const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([s],{type:'text/csv'}));a.download='cerquita-'+k+'-'+new Date().toISOString().slice(0,10)+'.csv';a.click();}
+const kp=(l,v,c='')=>`<div class="k ${c}"><small>${l}</small><b>${v}</b></div>`;
+async function R(n,a){const{data,error}=await sb.rpc(n,a);if(error){warns.push(n+': '+error.message);return null}return data}
+async function load(){warns.length=0;
+let[sm,sc,ds,od,sr,us,cl,pe,se,rf]=await Promise.all([R('admin_summary'),R('admin_status_counts'),R('admin_daily_sales',{p_days:14}),R('admin_orders',{p_limit:100}),R('admin_stores'),R('admin_users'),R('admin_claims'),R('admin_pending'),R('admin_settlements'),R('admin_refunds')]);
+sm=sm||{};const u=(us||[]).filter(x=>!x.deleted_at),cnt=r=>u.filter(x=>x.role===r).length,st=(sr||[]).filter(x=>!x.deleted_at);
+$('#k1').innerHTML=kp('Ventas entregadas',M(sm.sales_total))+kp('Pedidos entregados',sm.orders_delivered||0)+kp('Ingresos de Cerquita',M(sm.cerquita_revenue),'n')+kp('Usuarios activos',u.length)+kp('Comercios activos',st.length)+kp('Reclamos',(cl||[]).length,'o');
+$('#st').innerHTML=(sc||[]).map(x=>`<span class="chip">${tr(x.status)}: <b>${x.n}</b></span>`).join('')||'<span class="em">Sin pedidos</span>';
+const mx=Math.max(1,...(ds||[]).map(x=>+x.sales));$('#ch').innerHTML=(ds||[]).map(x=>`<div title="${x.day}: ${M(x.sales)} · ${x.orders} pedidos"><i style="height:${Math.round(x.sales/mx*100)}px"></i>${String(x.day).slice(8)}</div>`).join('')||'<span class="em">Sin ventas</span>';
+$('#k2').innerHTML=kp('Clientes',cnt('cliente'))+kp('Comercios (cuentas)',cnt('comercio'))+kp('Repartidores',cnt('repartidor'))+kp('Tiendas abiertas',st.filter(x=>x.is_open).length,'n')+kp('Reclamos',(cl||[]).length,'o');
+const tp=(sm.couriers_pending||0)+(sm.merchants_pending||0);
+$('#k3').innerHTML=kp('Ingresos de Cerquita',M(sm.cerquita_revenue))+kp('Por pagar a comercios',M(sm.merchants_pending),'o')+kp('Por pagar a repartidores',M(sm.couriers_pending),'o')+kp('Total por liquidar',M(tp),'n')+kp('Efectivo por entregar',M(sm.cash_pending),'n')+kp('Ticket promedio',M(sm.orders_delivered?sm.sales_total/sm.orders_delivered:0));
+[['orders',od],['stores',sr],['users',us],['claims',cl],['pending',pe],['settle',se],['refunds',rf]].forEach(([k,r])=>tbl(k,r||[]));
+const w=$('#warn');w.style.display=warns.length?'block':'none';w.textContent=warns.length?'Algunos datos no cargaron: '+warns.join(' | '):'';}
+async function enter(){const{data:{session}}=await sb.auth.getSession();if(!session)return;const ok=await R('is_admin');
+if(!ok){await sb.auth.signOut();$('#err').textContent='Esta cuenta no es de administrador.';return}
+$('#login').style.display='none';$('#app').style.display='block';$('#who').textContent=session.user.email;await load();}
+$('#go').onclick=async()=>{$('#err').textContent='';const{error}=await sb.auth.signInWithPassword({email:$('#em').value.trim(),password:$('#clave').value});if(error)return $('#err').textContent='Correo o contraseña incorrectos.';enter()};
+$('#clave').onkeydown=e=>e.key==='Enter'&&$('#go').click();$('#rf').onclick=load;$('#out').onclick=async()=>{await sb.auth.signOut();location.reload()};
+document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{document.querySelectorAll('nav button,.sec').forEach(x=>x.classList.remove('on'));b.classList.add('on');$('#'+b.dataset.t).classList.add('on')});
+document.addEventListener('input',e=>{if(e.target.dataset.k)body(e.target.dataset.k,e.target.value.toLowerCase())});document.addEventListener('click',e=>{if(e.target.dataset.x)csv(e.target.dataset.x)});
+enter();
+</script></body></html>
